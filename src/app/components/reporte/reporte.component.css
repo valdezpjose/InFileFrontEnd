@@ -1,0 +1,4 @@
+.overflow-hidden {
+    max-height: calc(100vh - 100px); /* Ajusta la altura máxima según tu barra de navegación */
+    overflow-y: auto;
+  }

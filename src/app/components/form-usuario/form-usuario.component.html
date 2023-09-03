@@ -1,0 +1,97 @@
+<div
+  class="container-fluid vh-100 d-flex justify-content-center align-items-center"
+>
+  <div class="row">
+    <div class="col">
+      <div class="card text-center">
+        <div class="card-body">
+          <h1 class="card-title">Inscripcion del Participante</h1>
+          <form>
+            <div class="form-group">
+              <label for="nombreEstudiante">Carnet</label>
+              <input
+                type="text"
+                class="form-control"
+                id="carnet"
+                name="carnet"
+                [(ngModel)]="carnet"
+                #carnetInput="ngModel"
+                pattern="^[A][^0]{1}5[^0]{2}[139]$"
+                required
+              />
+              <div
+                *ngIf="
+                  carnetInput?.invalid &&
+                  (carnetInput?.dirty || carnetInput?.touched)
+                "
+              >
+                <div *ngIf="carnetInput?.errors?.['required']">
+                  El carnet es obligatorio.
+                </div>
+                <div *ngIf="carnetInput?.errors?.['pattern']">
+                  El carnet no cumple con el patrón requerido.
+                </div>
+              </div>
+              <div *ngIf="carnetInput?.valid && carnetInput?.dirty">
+                Carnet correcto
+              </div>
+            </div>
+
+            <div class="form-group">
+                <label for="edadEstudiante">Nombre Completo</label>
+                <input type="text" class="form-control" id="nombreEstudiante" name="nombreEstudiante" placeholder="Ingrese el nombre del estudiante" [(ngModel)]="nombreEstudiante" (ngModelChange)="verificarCamposLlenos()">
+            </div>
+
+            <div class="form-group">
+                <label for="direccion">Direccion</label>
+                <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Ingrese la direccion del estudiante" [(ngModel)]="direccion" (ngModelChange)="verificarCamposLlenos()">
+            </div>
+
+            <div class="form-group">
+                <label for="generoPoesia">Género</label>
+                <select class="form-control" id="genero" name="genero" [(ngModel)]="genero" (ngModelChange)="verificarCamposLlenos()">
+                    <option *ngFor="let genero of generos" [value]="genero.id_genero">{{ genero.nombre_genero }}</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="telefono">Telefono</label>
+                <input type="text" class="form-control" id="telefono" name="telefono" placeholder="Ingrese el telefono del estudiante" [(ngModel)]="telefono" (ngModelChange)="verificarCamposLlenos()">
+            </div>
+
+            <div class="form-group">
+                <label for="fecha_nacimiento">Fecha Nacimiento</label>
+                <input type="date" class="form-control" id="fecha_nacimiento" name="fecha_nacimiento" [(ngModel)]="fecha_nacimiento" (change)="validarEdad()"  (ngModelChange)="verificarCamposLlenos()"/>
+            </div>
+            
+            <div *ngIf="edadValida === undefined">
+            </div>
+            
+            <div *ngIf="edadValida === true">
+                Edad válida
+            </div>
+            
+            <div *ngIf="edadValida === false">
+                Menor de edad
+            </div>
+
+            <div class="form-group">
+                <label for="carrera">Telefono</label>
+                <input type="text" class="form-control" id="carrera" name="carrera" placeholder="Ingrese la carrera del estudiante" [(ngModel)]="carrera" (ngModelChange)="verificarCamposLlenos()">
+            </div>
+
+            <div class="form-group">
+                <label for="generoPoesia">Género Poesía</label>
+                <select class="form-control" id="generoPoesia" name="generoPoesia" [(ngModel)]="generoPoesia" (ngModelChange)="verificarCamposLlenos()">
+                    <option *ngFor="let genero of generosPoesia" [value]="genero.id_genero_poesia">{{ genero.nombre_genero_poesia }}</option>
+                </select>
+            </div>
+
+            <br />
+            <button type="button" class="btn btn-primary" [disabled]="carnetInput?.invalid || !edadValida || !todosLosCamposLlenos" (click)="inscribirEstudiante()">Inscribir</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

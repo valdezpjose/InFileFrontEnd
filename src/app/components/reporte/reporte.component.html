@@ -1,0 +1,66 @@
+<div class="container-fluid vh-100 d-flex flex-column">
+<div class="container-fluid vh-100 d-flex justify-content-center align-items-center">
+    <div class="row">
+        <div class="col">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h1 class="card-title">Informacion de Busqueda</h1>
+                    <form>
+                        <div class="form-group">
+                            <label for="nombreEstudiante">Fecha de Declamación</label>
+                            <input type="date" class="form-control" id="fechaDeclamacion" name="fechaDeclamacion" [(ngModel)]="fechaDeclamacion">
+                        </div>
+                        <div class="form-group">
+                            <label for="edadEstudiante">Edad</label>
+                            <input type="number" class="form-control" id="edadEstudiante" name="edadEstudiante" placeholder="Ingrese la edad del estudiante" [(ngModel)]="edadEstudiante">
+                        </div>
+                        <div class="form-group">
+                            <label for="carreraEstudiante">Carrera</label>
+                            <select class="form-control" id="carreraEstudiante" name="carreraEstudiante" [(ngModel)]="carreraEstudiante">
+                                <option value="0">Seleccione una carrera</option>
+                                <option *ngFor="let carrera of carreras" [value]="carrera.id_carrera">{{ carrera.nombre_carrera  }}</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="generoPoesia">Género Poesía</label>
+                            <select class="form-control" id="generoPoesia" name="generoPoesia" [(ngModel)]="generoPoesia">
+                                <option value="0">Seleccione una genero</option>
+                                <option *ngFor="let genero of generosPoesia" [value]="genero.id_genero_poesia">{{ genero.nombre_genero_poesia }}</option>
+                            </select>
+                        </div>
+                        <br>
+                        <br>
+                        <br>
+                        <button type="button" class="btn btn-primary" (click)="cargarDatos()">Buscar</button>
+                        <br>
+                        <br>
+                        <br>
+                        <button (click)="exportexcel()" class="btn btn-secondary">Descargar reporte excel</button>
+                        <br>
+                        <br>
+                        <br>
+                        <button (click)="exportToPDF()" class="btn btn-success">Descargar reporte pdf</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container mt-4 overflow-auto" style="height: 700px;">
+        <table id="tablaEstudiantes"  class="table table-bordered ">
+            <thead>
+                <tr>
+                    <th>Nombre Estudiante</th>
+                    <th>Edad</th>
+                    <th>Carrera</th>
+                    <th>Género Poesía</th>
+                    <th>Fecha Declamación</th>
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </div>
+</div>
+</div>
+
